@@ -113,10 +113,7 @@ Note: not all fields will be included in each message. There are incomplete offi
     "reply_users_count": int,
     "latest_reply": str,
     "reply_users": [str],
-    "replies": [{
-            "user": str,
-            "ts": str
-        },
+    "replies": [
         {
             "user": str,
             "ts": str
