@@ -9,9 +9,9 @@ Simple module that reads Slack public data exports into a data structure for eas
 4. `slack = Data()` will read the files and initialize the data structure. 
 5. Ex: To list all messages sent in August 2018, `slack.get_messages_by_datestring_prefix("2018-08")`
 
-# JSON Schemas (NOTE - not all fields will be included)
+# JSON Schemas
 
-There are official docs [here](https://slack.com/help/articles/220556107-How-to-read-Slack-data-exports) which offer some more detailed explanation of some fields but they are incomplete.
+Note: not all fields will be included in each message. There are incomplete official docs [here](https://slack.com/help/articles/220556107-How-to-read-Slack-data-exports) which offer some more detailed explanation of some fields.
 
 ### User:
 ```
@@ -123,10 +123,12 @@ There are official docs [here](https://slack.com/help/articles/220556107-How-to-
         }
     ],
     "subscribed": false,
-    "reactions": [{
-        "name": str,
-        "users": [str],
-        "count": int
-    }]
+    "reactions": [
+        {
+            "name": str,
+            "users": [str],
+            "count": int
+        }
+    ]
 }
 ```
