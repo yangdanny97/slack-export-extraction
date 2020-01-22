@@ -7,7 +7,7 @@ Simple module that reads Slack public data exports into a data structure for eas
 2. Put the slack data export files into `/data` under that directory (messages for channel MyChannel would be in `/data/MyChannel`).
 3. `from slack_extract import Data` to import
 4. `slack = Data()` will read the files and initialize the data structure. 
-5. Example: To get all messages by sent in August 2018, `messages = slack.get_messages_by_datestring_prefix("2017-08")`
+5. Ex: To list all messages sent in August 2018, `slack.get_messages_by_datestring_prefix("2018-08")`
 
 # JSON Schemas (NOTE - not all fields will be included)
 
