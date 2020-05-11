@@ -2,50 +2,31 @@ import os
 import json
 from typing import Dict, List, Tuple, Any, Callable
 
-basedir = './data'
-
 Message = Dict[str, Any]
 Channel = Dict[str, Any]
 User = Dict[str, Any]
 
-'''
-Fields:
-users - dict representing `users.json`
-channels - dict representing `channels.json`
-messages - nested dict mapping channel name to messages in that channel; 
-    messages for each channel are represented as a dict of date to list of messages for that date; 
-    each message is a dict which has added fields for date and channel, for convenience
 
-Methods:
-get_messages - list of all messages, or optionally all messages from a single channel
-get_filtered_messages - use a custom lambda to return a list of filter messages (also optionally specify a channel)
-get_messages_by_date - list of all messages that were sent on a particular date
-get_messages_by_datestring - YYYY-MM-DD
-get_messages_by_datestring_prefix - makes it easy to filter by year or month
-get_messages_by_user - list of all messages sent by a particular user ID
-get_channel_names - list of all channel names
-get_user_ids - list of user ids
-'''
-class Data:
-    def __init__(self):
+class Slack:
+    def __init__(self, data_dir: str):
         self.users = None
         # set up users
-        with open("./data/users.json") as f:
+        with open(data_dir + "/users.json") as f:
             self.users = json.load(f)
-        with open("./data/channels.json") as f:
+        with open(data_dir + "/channels.json") as f:
             self.channels = json.load(f)
         self.messages = {}
         # set up channels
-        for subdir, dirs, files in os.walk(basedir):
+        for subdir, dirs, files in os.walk(data_dir):
             for channel in dirs:
                 self.messages[channel] = {}
             for fname in files:
-                if fname in ["integration_logs.json", "users.json", "channels.json", ".DS_Store"]:
+                if fname in ["integration_logs.json", "users.json", "channels.json"] or not fname.endswith(".json"):
                     continue
                 path = os.path.join(subdir, fname)
                 s = path.split("/")
-                cname = s[2]
-                date = fname.split(".")[0]
+                cname = s[-2]
+                date = fname.split(".")[-2]
                 messages = []
                 with open(path, "r") as f:
                     try:
