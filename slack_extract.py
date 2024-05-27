@@ -21,7 +21,7 @@ class Slack:
             for channel in dirs:
                 self.messages[channel] = {}
             for fname in files:
-                if fname in ["integration_logs.json", "users.json", "channels.json"] or not fname.endswith(".json"):
+                if fname in ["integration_logs.json", "users.json", "channels.json", "file_conversations.json", "canvases.json"] or not fname.endswith(".json"):
                     continue
                 path = os.path.join(subdir, fname)
                 s = path.split("/")
